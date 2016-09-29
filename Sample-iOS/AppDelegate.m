@@ -24,7 +24,17 @@
 
 @implementation AppDelegate
 
+// iOS 9
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    BOOL urlHandled = [SSOService handleURL:url callbackScheme:@"sfoauth"];
+    if (!urlHandled) {
+        // Handle any other URLs
+    }
+    return urlHandled;
+}
+
+// iOS 8 / iOS 7
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     BOOL urlHandled = [SSOService handleURL:url callbackScheme:@"sfoauth"];
     if (!urlHandled) {
         // Handle any other URLs
